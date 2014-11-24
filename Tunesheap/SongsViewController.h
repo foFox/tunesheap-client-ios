@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  SongsViewController.h
 //  Tunesheap
 //
 //  Created by Robert Lis on 24/11/2014.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController
-@property (strong, nonatomic) NSDictionary *artist;
+@interface SongsViewController : UIViewController
+@property (nonatomic, strong) NSDictionary *album;
 @end
-
