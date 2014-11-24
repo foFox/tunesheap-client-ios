@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3245B150-7C93-4E35-A8E1-BC74C9219027</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Tunesheap</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BC36037663B36D14A967D2D24DB428B5962F6E6F</key>
+		<string>https://github.com/foFox/tunesheap-client-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Tunesheap.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BC36037663B36D14A967D2D24DB428B5962F6E6F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/foFox/tunesheap-client-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BC36037663B36D14A967D2D24DB428B5962F6E6F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BC36037663B36D14A967D2D24DB428B5962F6E6F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Tunesheap</string>
+		</dict>
+	</array>
+</dict>
+</plist>
