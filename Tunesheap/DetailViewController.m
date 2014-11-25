@@ -40,6 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureView];
+    ((UICollectionViewFlowLayout *)self.albumsCollectionView.collectionViewLayout).estimatedItemSize = CGSizeMake(150, 150);
 }
 
 - (void)didReceiveMemoryWarning {

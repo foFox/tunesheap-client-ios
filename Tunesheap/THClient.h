@@ -8,7 +8,7 @@
 
 #import "AFHTTPSessionManager.h"
 
-static NSString *baseURL = @"http://localhost:3000/api/v1/";
+static NSString *baseURL = @"http://10.0.0.19:3000/api/v1/";
 
 @interface THClient : AFHTTPSessionManager
 +(instancetype)sharedClient;

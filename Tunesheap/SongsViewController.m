@@ -8,6 +8,7 @@
 
 #import "SongsViewController.h"
 #import "THClient.h"
+#import "THSongTableViewCell.h"
 
 @interface SongsViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *songsTable;
@@ -33,6 +34,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.songsTable.estimatedRowHeight = 62.0;
+    self.songsTable.rowHeight = UITableViewAutomaticDimension;
+    self.songsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.songsTable.separatorColor = [UIColor colorWithRed:191.0/255.0f green:24.0/255.0f blue:49.0/255.0f alpha:1.0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,10 +52,32 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"song_cell" forIndexPath:indexPath];
+    THSongTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"song_cell" forIndexPath:indexPath];
     NSDictionary *song = self.songs[indexPath.row];
-    cell.textLabel.text = song[@"name"];
+    cell.trackName.text = song[@"name"];
+    unsigned long minutes = [song[@"length"] integerValue] / 60;
+    unsigned long seconds = [song[@"length"] integerValue] % 60;
+    cell.duration.text = [NSString stringWithFormat:@"%.2lu:%.2lu", minutes, seconds];
+    cell.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20);
+    UIView *selectedBackground = [[UIView alloc] init];
+    selectedBackground.backgroundColor = [UIColor colorWithRed:191.0/255.0f green:24.0/255.0f blue:49.0/255.0f alpha:0.3];
+    [cell setSelectedBackgroundView:selectedBackground];
     return cell;
+}
+
+#pragma mark - Table View Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *songSelected = self.songs[indexPath.row];
+    [self performSegueWithIdentifier:@"play_song" sender:songSelected];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"play_song"]) {
+        if([segue.destinationViewController respondsToSelector:NSSelectorFromString(@"song")]) {
+            [segue.destinationViewController setValue:sender forKey:@"song"];
+            [segue.destinationViewController navigationItem].title = self.album[@"name"];
+        }
+    }
 }
 
 #pragma mark - Private API

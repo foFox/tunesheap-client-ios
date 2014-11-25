@@ -22,6 +22,11 @@
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:191.0/255.0f green:24.0/255.0f blue:49.0/255.0f alpha:1.0]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f]}];
+    id proxy = [UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil];
+    [proxy setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f]} forState:UIControlStateNormal];
     return YES;
 }
 
@@ -55,6 +60,10 @@
     } else {
         return NO;
     }
+}
+
+- (UISplitViewControllerDisplayMode)targetDisplayModeForActionInSplitViewController:(UISplitViewController *)svc {
+    return UISplitViewControllerDisplayModeAutomatic;
 }
 
 @end

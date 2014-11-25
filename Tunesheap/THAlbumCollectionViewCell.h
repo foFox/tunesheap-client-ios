@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OSLabel.h"
 
 @interface THAlbumCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *artwork;
-@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet OSLabel *title;
 @end

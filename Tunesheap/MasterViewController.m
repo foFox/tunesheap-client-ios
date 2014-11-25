@@ -8,10 +8,13 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "THArtistTableViewCell.h"
 #import "THClient.h"
 
 @interface MasterViewController ()
 @property NSArray *artists;
+@property NSDateFormatter *formatterFrom;
+@property NSDateFormatter *formatterTo;
 @end
 
 @implementation MasterViewController
@@ -22,6 +25,10 @@
         self.clearsSelectionOnViewWillAppear = NO;
         self.preferredContentSize = CGSizeMake(320.0, 600.0);
     }
+    
+    self.tableView.estimatedRowHeight = 44.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,12 +40,20 @@
         self.artists = artists;
         [self.tableView reloadData];
     } failure:nil];
+    self.formatterFrom = [[NSDateFormatter alloc] init];
+    [self.formatterFrom setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
+
+    self.formatterTo = [[NSDateFormatter alloc] init];
+    self.formatterTo.dateFormat = @"MMMM d YYYY";
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.separatorColor = [UIColor colorWithRed:191.0/255.0f green:24.0/255.0f blue:49.0/255.0f alpha:1.0];
 }
 
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+    if ([[segue identifier] isEqualToString:@"show_albums"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSDictionary *artist = self.artists[indexPath.row];
         DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
@@ -58,14 +73,24 @@
     return self.artists.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    NSDictionary *artist = self.artists[indexPath.row];
-    cell.textLabel.text = artist[@"name"];
-    return cell;
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"show_albums" sender:nil];
 }
 
-
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    THArtistTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"artist_cell" forIndexPath:indexPath];
+    NSDictionary *artist = self.artists[indexPath.row];
+    cell.artistName.text = artist[@"name"];
+    cell.artistCountry.text = artist[@"country"];
+    NSDate *date = [self.formatterFrom dateFromString:artist[@"dob"]];    
+    cell.artistBirthday.text = [self.formatterTo stringFromDate:date];
+    cell.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20);
+    UIView *selectedBackground = [[UIView alloc] init];
+    selectedBackground.backgroundColor = [UIColor colorWithRed:191.0/255.0f green:24.0/255.0f blue:49.0/255.0f alpha:0.3];
+    [cell setSelectedBackgroundView:selectedBackground];
+    return cell;
+}
 
 #pragma mark - Private API
 
