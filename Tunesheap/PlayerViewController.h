@@ -10,4 +10,5 @@
 
 @interface PlayerViewController : UIViewController
 @property (nonatomic, strong) NSDictionary *song;
+@property (nonatomic, strong) NSString *albumArtworkURL;
 @end

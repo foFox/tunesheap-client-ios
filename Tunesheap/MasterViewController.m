@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 #import "THArtistTableViewCell.h"
 #import "THClient.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface MasterViewController ()
 @property NSArray *artists;
@@ -85,10 +86,7 @@
     cell.artistCountry.text = artist[@"country"];
     NSDate *date = [self.formatterFrom dateFromString:artist[@"dob"]];    
     cell.artistBirthday.text = [self.formatterTo stringFromDate:date];
-    cell.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20);
-    UIView *selectedBackground = [[UIView alloc] init];
-    selectedBackground.backgroundColor = [UIColor colorWithRed:191.0/255.0f green:24.0/255.0f blue:49.0/255.0f alpha:0.3];
-    [cell setSelectedBackgroundView:selectedBackground];
+    [cell.artistThumbnail setImageWithURL:[NSURL URLWithString:artist[@"picture_url"]]];
     return cell;
 }
 

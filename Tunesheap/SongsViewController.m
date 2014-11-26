@@ -9,6 +9,7 @@
 #import "SongsViewController.h"
 #import "THClient.h"
 #import "THSongTableViewCell.h"
+#import "THSequencePlayer.h"
 
 @interface SongsViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *songsTable;
@@ -76,6 +77,11 @@
         if([segue.destinationViewController respondsToSelector:NSSelectorFromString(@"song")]) {
             [segue.destinationViewController setValue:sender forKey:@"song"];
             [segue.destinationViewController navigationItem].title = self.album[@"name"];
+            [self playSong:sender];
+        }
+        
+        if([segue.destinationViewController respondsToSelector:NSSelectorFromString(@"albumArtworkURL")]) {
+            [segue.destinationViewController setValue:self.album[@"artwork_url"] forKey:@"albumArtworkURL"];
         }
     }
 }
@@ -91,6 +97,16 @@
     }];
 }
 
+-(void)playSong:(NSDictionary *)song {
+    THSequencePlayer *player = [THSequencePlayer sharedPlayer];
+    NSMutableArray *items = [NSMutableArray array];
+    [self.songs enumerateObjectsUsingBlock:^(NSDictionary *song, NSUInteger idx, BOOL *stop) {
+        AVPlayerItem *item = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:song[@"data"]]];
+        [items addObject:item];
+    }];
+    
+    [player setItemsToPlay:items startAt:[self.songs indexOfObject:song]];
+}
 
 
 @end

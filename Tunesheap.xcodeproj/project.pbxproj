@@ -28,6 +28,7 @@
 		7186A5CF1A23FFF200063327 /* THArtistTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7186A5CE1A23FFF200063327 /* THArtistTableViewCell.m */; };
 		7186A6071A242BC500063327 /* OSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7186A6061A242BC500063327 /* OSLabel.m */; };
 		7186A60A1A2449ED00063327 /* THSongTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7186A6091A2449ED00063327 /* THSongTableViewCell.m */; };
+		7186A6101A26522600063327 /* THSequencePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7186A60F1A26522600063327 /* THSequencePlayer.m */; };
 		FDF1DFBE6B7749C49C6B7B32 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E484902154724C8EBA096BD7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,8 @@
 		7186A6061A242BC500063327 /* OSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSLabel.m; sourceTree = "<group>"; };
 		7186A6081A2449ED00063327 /* THSongTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSongTableViewCell.h; sourceTree = "<group>"; };
 		7186A6091A2449ED00063327 /* THSongTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSongTableViewCell.m; sourceTree = "<group>"; };
+		7186A60E1A26522600063327 /* THSequencePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSequencePlayer.h; sourceTree = "<group>"; };
+		7186A60F1A26522600063327 /* THSequencePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSequencePlayer.m; sourceTree = "<group>"; };
 		C013D841F6554AFC95393C13 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		E484902154724C8EBA096BD7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -180,6 +183,8 @@
 			children = (
 				714945FF1A23AB3A0072B31B /* THClient.h */,
 				714946001A23AB3A0072B31B /* THClient.m */,
+				7186A60E1A26522600063327 /* THSequencePlayer.h */,
+				7186A60F1A26522600063327 /* THSequencePlayer.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -352,6 +357,7 @@
 				714946081A23C0580072B31B /* SongsViewController.m in Sources */,
 				712EC61F1A23A08600C94C83 /* AppDelegate.m in Sources */,
 				712EC6221A23A08600C94C83 /* MasterViewController.m in Sources */,
+				7186A6101A26522600063327 /* THSequencePlayer.m in Sources */,
 				7186A60A1A2449ED00063327 /* THSongTableViewCell.m in Sources */,
 				714946041A23B7C40072B31B /* THAlbumCollectionViewCell.m in Sources */,
 				712EC61C1A23A08600C94C83 /* main.m in Sources */,

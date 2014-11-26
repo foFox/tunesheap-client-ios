@@ -17,6 +17,10 @@
     self.artistThumbnail.layer.borderWidth = 2.0;
     [[self.artistThumbnail layer] setMagnificationFilter:kCAFilterNearest];
     [[self.moreButton.imageView layer] setMagnificationFilter:kCAFilterNearest];
+    self.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20);
+    UIView *selectedBackground = [[UIView alloc] init];
+    selectedBackground.backgroundColor = [UIColor colorWithRed:191.0/255.0f green:24.0/255.0f blue:49.0/255.0f alpha:0.3];
+    [self setSelectedBackgroundView:selectedBackground];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

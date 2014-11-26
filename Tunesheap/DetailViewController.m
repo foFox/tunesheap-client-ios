@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "THAlbumCollectionViewCell.h"
 #import "THClient.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *albumsCollectionView;
@@ -57,6 +58,7 @@
     THAlbumCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"album_cell" forIndexPath:indexPath];
     NSDictionary *album = self.albums[indexPath.row];
     cell.title.text = album[@"name"];
+    [cell.artwork setImageWithURL:[NSURL URLWithString:album[@"artwork_url"]]];
     return cell;
 }
 

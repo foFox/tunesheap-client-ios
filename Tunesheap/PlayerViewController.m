@@ -7,8 +7,10 @@
 //
 
 #import "PlayerViewController.h"
+#import "THSequencePlayer.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
-@interface PlayerViewController ()
+@interface PlayerViewController () <THSequencePlayerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *artwork;
 @property (weak, nonatomic) IBOutlet UILabel *songTitle;
 @property (weak, nonatomic) IBOutlet UISlider *progressSlider;
@@ -21,7 +23,6 @@
 
 @implementation PlayerViewController
 
-
 -(void)setSong:(NSDictionary *)newSong {
     if (_song != newSong) {
         _song = newSong;
@@ -31,11 +32,49 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIVisualEffectView *effectVview = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+    effectVview.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view insertSubview:effectVview aboveSubview:self.artwork];
+    
+    NSLayoutConstraint *constraintBottom = [NSLayoutConstraint constraintWithItem:effectVview
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.artwork
+                                                                        attribute:NSLayoutAttributeBottom
+                                                                       multiplier:1.0
+                                                                         constant:0.0];
+    
+    NSLayoutConstraint *constraintLeft = [NSLayoutConstraint constraintWithItem:effectVview
+                                                                      attribute:NSLayoutAttributeLeading
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.view
+                                                                        attribute:NSLayoutAttributeLeading
+                                                                       multiplier:1.0
+                                                                         constant:0.0];
+    
+    NSLayoutConstraint *constraintRight = [NSLayoutConstraint constraintWithItem:effectVview
+                                                                       attribute:NSLayoutAttributeTrailing
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self.view
+                                                                       attribute:NSLayoutAttributeTrailing
+                                                                      multiplier:1.0
+                                                                        constant:0.0];
+    
+    NSLayoutConstraint *constraintTop = [NSLayoutConstraint constraintWithItem:effectVview
+                                                                     attribute:NSLayoutAttributeTop
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:self.songTitle
+                                                                     attribute:NSLayoutAttributeTop
+                                                                    multiplier:1.0
+                                                                      constant:-10.0];
+    [self.view addConstraints:@[constraintBottom, constraintLeft, constraintRight, constraintTop]];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self configureView];
+    [THSequencePlayer sharedPlayer].delegate = self;
+    [self.artwork setImageWithURL:[NSURL URLWithString:self.albumArtworkURL]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,17 +87,30 @@
     
 }
 
-
 - (IBAction)nextButtonPressed:(id)sender {
-    
+    [[THSequencePlayer sharedPlayer] next];
 }
 
 - (IBAction)previousButtonPressed:(id)sender {
-    
+    [[THSequencePlayer sharedPlayer] previous];
 }
 
 - (IBAction)playPressed:(id)sender {
+    if([[THSequencePlayer sharedPlayer] isPlaying]) {
+        [[THSequencePlayer sharedPlayer] pause];
+    } else {
+        [[THSequencePlayer sharedPlayer] play];
+    }
     
+}
+
+#pragma mark - Player Delegate
+
+-(void)player:(THSequencePlayer *)player playbackDidProgress:(CGFloat)percentPlayed toSecond:(NSInteger)seconds {
+    self.progressSlider.value = percentPlayed;
+    unsigned long minutes = seconds / 60;
+    unsigned long secondsLeft = seconds % 60;
+    self.timePassed.text = [NSString stringWithFormat:@"%.2lu:%.2lu", minutes, secondsLeft];
 }
 
 #pragma mark - Private API
